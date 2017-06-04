@@ -19,7 +19,7 @@ RUN wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/$CH
     && unzip /tmp/chromedriver.zip chromedriver -d /usr/bin/ \
     && chmod ugo+rx /usr/bin/chromedriver
 ### FINAL DEPS INCLUDING JAVA, NODE & XVFB
-RUN apt-get -y install \
+RUN apt-get update && apt-get -y install \
         gtk2-engines-pixbuf \
         libxtst6 \
         openjdk-8-jre-headless \
