@@ -17,7 +17,7 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
 ### CHROME DRIVER
 RUN wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip \
     && unzip /tmp/chromedriver.zip chromedriver -d /usr/bin/ \
-    && chmod ugo+rx /usr/bin/chromedriver \
+    && chmod ugo+rx /usr/bin/chromedriver
 ### FINAL DEPS INCLUDING JAVA, NODE & XVFB
 RUN apt-get -y install \
         gtk2-engines-pixbuf \
