@@ -8,18 +8,18 @@ RUN apt-get update && apt-get install -y \
 ### DEPS FOR FIRST LINES
         gnupg \
         unzip \
-        wget \
+        wget
 ### CHROME
-    && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
     && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list \
     && apt-get update && apt-get install -y \
-        google-chrome-stable \
+        google-chrome-stable
 ### CHROME DRIVER
-    && wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip \
+RUN wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip \
     && unzip /tmp/chromedriver.zip chromedriver -d /usr/bin/ \
     && chmod ugo+rx /usr/bin/chromedriver \
 ### FINAL DEPS INCLUDING JAVA, NODE & XVFB
-    && apt-get -y install \
+RUN apt-get -y install \
         gtk2-engines-pixbuf \
         libxtst6 \
         openjdk-8-jre-headless \
@@ -32,7 +32,6 @@ RUN apt-get update && apt-get install -y \
         xfonts-scalable \
         xvfb \
     && ln -s /usr/bin/nodejs /usr/bin/node \
-    && apt-get remove --purge -y $(apt-mark showauto) \
     && apt-get clean all \
     && rm -rf /var/lib/apt/lists/
 
