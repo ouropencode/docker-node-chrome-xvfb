@@ -2,19 +2,19 @@ FROM debian:sid
 
 MAINTAINER Joe Eaves <joe.eaves@shadowacre.ltd>
 
-ENV CHROME_DRIVER_VERSION 2.29
-
 RUN apt-get update && apt-get install -y \
 ### DEPS FOR FIRST LINES
         gnupg \
         unzip \
-        wget
+        wget \
+        ash
 ### CHROME
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
     && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list \
     && apt-get update && apt-get install -y \
         google-chrome-stable
 ### CHROME DRIVER
+ENV CHROME_DRIVER_VERSION 2.32
 RUN wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip \
     && unzip /tmp/chromedriver.zip chromedriver -d /usr/bin/ \
     && chmod ugo+rx /usr/bin/chromedriver
@@ -31,7 +31,6 @@ RUN apt-get update && apt-get -y install \
         xfonts-cyrillic \
         xfonts-scalable \
         xvfb \
-    && ln -s /usr/bin/nodejs /usr/bin/node \
     && apt-get clean all \
     && rm -rf /var/lib/apt/lists/
 
