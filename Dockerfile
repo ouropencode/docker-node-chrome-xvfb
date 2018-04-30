@@ -14,7 +14,7 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
     && apt-get update && apt-get install -y \
         google-chrome-stable
 ### CHROME DRIVER
-ENV CHROME_DRIVER_VERSION 2.32
+ENV CHROME_DRIVER_VERSION 2.38
 RUN wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip \
     && unzip /tmp/chromedriver.zip chromedriver -d /usr/bin/ \
     && chmod ugo+rx /usr/bin/chromedriver
